@@ -8,10 +8,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-/**
- * This test class sets up ({@link #setUp()}}) and adds some more
- * tests for {@link SortedArrayList} based on {@link TestForAllLists}.
- */
+
 public class TestArrayLists extends TestForAllLists{
 
     @Before
