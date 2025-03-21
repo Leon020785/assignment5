@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
@@ -47,6 +46,7 @@ public class PersonsGUI extends GridPane {
         TextField nameField = new TextField();
         nameField.setPrefColumnCount(5);
 
+        // her har vi tilføjet age i opg. 3  
         TextField ageField = new TextField();
         ageField.setPrefColumnCount(5);
 
@@ -63,6 +63,8 @@ public class PersonsGUI extends GridPane {
 
         avgWeightLabel = new Label("Average weight: 0");
         mostCommonNameLabel = new Label("Most common name: N/A");
+        
+        // her har vi tilføjt min/max age opgaven 4
         minAgeLabel = new Label("min age: 0");
         maxAgeLabel = new Label("max age: 0");
 
@@ -74,7 +76,9 @@ public class PersonsGUI extends GridPane {
                 int weight = Integer.parseInt(weightField.getText());
                 if (weight < 0) throw new NumberFormatException("Weight must be positive");
 
+                // her har opgaven 3c hvor vi tilføje age
                 int age = Integer.parseInt(ageField.getText());
+                // her kommer en fejl hvis den er nagativ.
                 if (age < 0) throw new NumberFormatException("Age must be positive");
 
                 Person person = new Person(nameField.getText(), weight, age);
@@ -199,11 +203,13 @@ public class PersonsGUI extends GridPane {
         for (int i = 0; i < persons.size(); i++) {
             totalWeight += persons.get(i).weight;
         }*/
-        double avgWeight = persons.stream().mapToDouble(Person::getWeight)
-                .average().orElse(0.0);
+            double avgWeight = persons.stream()
+                                        .mapToDouble(Person::getWeight)
+                                        .average()
+                                        .orElse(0.0);
         avgWeightLabel.setText("Average weight: " + avgWeight);
 
-
+        // opgave 5 her beregner den AVG age hvor vi bruger stream.
         /*if (persons.size() > 0) {
             avgWeightLabel.setText("Average weight: " + (totalWeight / persons.size()));
         } else {
@@ -212,11 +218,13 @@ public class PersonsGUI extends GridPane {
         }
          */
         if(!persons.isEmpty()) {
-            int minAge = persons.stream().mapToInt(Person::getAge)
-                    .min().orElse(0);
+            int minAge = persons.stream()
+                                .mapToInt(Person::getAge)
+                                .min().orElse(0);
 
-            int maxAge = persons.stream().mapToInt(Person::getAge)
-                    .max().orElse(0);
+            int maxAge = persons.stream()
+                                .mapToInt(Person::getAge)
+                                .max().orElse(0);
 
             minAgeLabel.setText("Min age: " + minAge);
             maxAgeLabel.setText("Max age: " + maxAge);
