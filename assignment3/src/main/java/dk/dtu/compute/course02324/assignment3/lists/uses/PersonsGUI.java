@@ -18,10 +18,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-
-
-
-
 public class PersonsGUI extends GridPane {
 
     /**

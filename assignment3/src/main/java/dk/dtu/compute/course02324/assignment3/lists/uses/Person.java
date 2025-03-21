@@ -2,7 +2,7 @@ package dk.dtu.compute.course02324.assignment3.lists.uses;
 
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
-import java.util.function.ToIntFunction;
+
 
 public class Person implements Comparable<Person> {
 
@@ -12,8 +12,7 @@ public class Person implements Comparable<Person> {
 
     public Person(@NotNull String name, @NotNull double weight,@NotNull int age) {
         if (name == null || weight <= 0 || age < 0) {
-            throw new IllegalArgumentException("A persons must be initialized with a" +
-                    "(non null) name and an age greater than 0");
+            throw new IllegalArgumentException("A persons must be initialized with a" + "(non null) name and an age greater than 0");
         }
         this.name = name;
         this.weight = weight;
@@ -57,7 +56,7 @@ public class Person implements Comparable<Person> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, weight);
+        return Objects.hash(name, weight, age);
     }
 
     /**
@@ -72,18 +71,6 @@ public class Person implements Comparable<Person> {
         // chose a simpler representation here.
         return name + ", " + weight + "kg, " + age + " years";
     }
-
-    /*
-     * The following two methods must be implemented in order to respect the contract of objects
-     * with respect to equals(), hashCode() and compareTo() methods. The details and reasons
-     * as to why will be discussed much later.
-     *
-     * The implementations can be done fully automatically my IntelliJ (using the two attributes
-     * of person).
-     *
-     * @param o
-     * @return
-     */
 
 
 }
