@@ -2,24 +2,32 @@ package dk.dtu.compute.course02324.assignment3.lists.uses;
 
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
+import java.util.function.ToIntFunction;
 
 public class Person implements Comparable<Person> {
 
     final public String name;
     final public double weight;
-    public static int age;
+    public int age;
 
     public Person(@NotNull String name, @NotNull double weight,@NotNull int age) {
-        if (name == null || weight <= 0 || age >= 0) {
+        if (name == null || weight <= 0 || age < 0) {
             throw new IllegalArgumentException("A persons must be initialized with a" +
                     "(non null) name and an age greater than 0");
         }
         this.name = name;
         this.weight = weight;
         this.age = age;
+
     }
-    public static int getAge(){
+    public int getAge(){
         return age;
+    }
+
+    public void setAge(int age) {
+        if (age < 0) {throw new IllegalArgumentException("Age must be greater than 0");
+    }
+        this.age = age;
     }
 
     public String getName() {
@@ -62,7 +70,7 @@ public class Person implements Comparable<Person> {
         // This could be automatically generated, but this automatically
         // generated representation is a bit too verbose. Therefore, we
         // chose a simpler representation here.
-        return name + ", " + weight + "kg";
+        return name + ", " + weight + "kg, " + age + " years";
     }
 
     /*

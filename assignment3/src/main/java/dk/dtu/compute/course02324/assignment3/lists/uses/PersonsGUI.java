@@ -21,12 +21,8 @@ import java.util.Map;
 
 
 
-/**
- * A GUI element that is allows the user to interact and
- * change a list of persons.
- *
- * @author Ekkart Kindler, ekki@dtu.dk
- */
+
+
 public class PersonsGUI extends GridPane {
 
     /**
@@ -34,17 +30,12 @@ public class PersonsGUI extends GridPane {
      */
     final private List<Person> persons;
     private GridPane personsPane;
-    //private int weightCount = 1;
     private Label avgWeightLabel;
     private Label mostCommonNameLabel;
+    private Label minAgeLabel;
+    private Label maxAgeLabel;
 
 
-    /**
-     * Constructor which sets up the GUI attached a list of persons.
-     *
-     * @param persons the list of persons which is to be maintained in
-     *                this GUI component; it must not be <code>null</code>
-     */
 
 
     public PersonsGUI(@NotNull List<Person> persons) {
@@ -60,8 +51,6 @@ public class PersonsGUI extends GridPane {
         ageField.setPrefColumnCount(5);
 
 
-
-
         TextField weightField = new TextField();
         weightField.setPrefColumnCount(5);
 
@@ -71,8 +60,11 @@ public class PersonsGUI extends GridPane {
         Label errorLabel = new Label("");
 
 
+
         avgWeightLabel = new Label("Average weight: 0");
         mostCommonNameLabel = new Label("Most common name: N/A");
+        minAgeLabel = new Label("min age: 0");
+        maxAgeLabel = new Label("max age: 0");
 
 
         Button addButton = new Button("Add at the end of the list");
@@ -81,7 +73,11 @@ public class PersonsGUI extends GridPane {
                 errorLabel.setText("");
                 int weight = Integer.parseInt(weightField.getText());
                 if (weight < 0) throw new NumberFormatException("Weight must be positive");
-                Person person = new Person(nameField.getText(), weight, Person.getAge());
+
+                int age = Integer.parseInt(ageField.getText());
+                if (age < 0) throw new NumberFormatException("Age must be positive");
+
+                Person person = new Person(nameField.getText(), weight, age);
                 persons.add(person);
                 // makes sure that the GUI is updated accordingly
                 update();
@@ -97,11 +93,17 @@ public class PersonsGUI extends GridPane {
         addAtIndexButton.setOnAction(e -> {
             try {
                 errorLabel.setText("");
+
                 int index = Integer.parseInt(indexField.getText());
                 int weight = Integer.parseInt(weightField.getText());
                 if (weight < 0) throw new NumberFormatException("Index is not valid");
-                Person person = new Person(nameField.getText(), weight, Person.getAge());
+
+                int age = Integer.parseInt(ageField.getText());
+                if (age < 0) throw new NumberFormatException("Age is not valid");
+
+                Person person = new Person(nameField.getText(), weight, age);
                 persons.add(index, person);
+
                 update();
             } catch (NumberFormatException | IndexOutOfBoundsException ex) {
                 errorLabel.setText("Index is not valid");
@@ -150,7 +152,7 @@ public class PersonsGUI extends GridPane {
         HBox spacer = new HBox();
 
 
-        VBox actionBox = new VBox(overskrifter, inputFelter, addButton, addIndexHBox, sortButton, clearButton, avgWeightLabel, mostCommonNameLabel, errorLabel);
+        VBox actionBox = new VBox(overskrifter, inputFelter, addButton, addIndexHBox, sortButton, clearButton, avgWeightLabel, mostCommonNameLabel, maxAgeLabel,minAgeLabel,errorLabel);
         //VBox actionBox = new VBox(nameField, weightField, indexField, addButton, addAtIndexButton, sortButton, clearButton);
 
         actionBox.setSpacing(5.0);
@@ -193,16 +195,41 @@ public class PersonsGUI extends GridPane {
     private void update() {
         personsPane.getChildren().clear();
 
-        double totalWeight = 0;
+        /*double totalWeight = 0;
         for (int i = 0; i < persons.size(); i++) {
             totalWeight += persons.get(i).weight;
-        }
-        if (persons.size() > 0) {
+        }*/
+        double avgWeight = persons.stream().mapToDouble(Person::getWeight)
+                .average().orElse(0.0);
+        avgWeightLabel.setText("Average weight: " + avgWeight);
+
+
+        /*if (persons.size() > 0) {
             avgWeightLabel.setText("Average weight: " + (totalWeight / persons.size()));
         } else {
             avgWeightLabel.setText("Average weight: 0");
 
         }
+         */
+        if(!persons.isEmpty()) {
+            int minAge = persons.stream().mapToInt(Person::getAge)
+                    .min().orElse(0);
+
+            int maxAge = persons.stream().mapToInt(Person::getAge)
+                    .max().orElse(0);
+
+            minAgeLabel.setText("Min age: " + minAge);
+            maxAgeLabel.setText("Max age: " + maxAge);
+        } else {
+            minAgeLabel.setText("Min age: 0");
+            maxAgeLabel.setText("Max age: 0");
+        }
+
+
+
+
+
+
         HashMap<String, Integer> nameCount = new HashMap<>();
         for (int i = 0; i < persons.size(); i++) {
             nameCount.put(persons.get(i).getName(), nameCount.getOrDefault(persons.get(i).getName(), 0) + 1);
@@ -234,10 +261,4 @@ public class PersonsGUI extends GridPane {
             personsPane.add(entry, 0, i);
         }
     }
-
-    // TODO this GUI could be extended by some additional widgets for issuing other
-    //      operations of lists. And the possibly thrown exceptions should be caught
-    //      in the event handler (and possibly shown in an additional text area for
-    //      exceptions; see Assignment 2).
-
 }
