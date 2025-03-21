@@ -2,7 +2,6 @@ package dk.dtu.compute.course02324.assignment3.lists.uses;
 
 
 import dk.dtu.compute.course02324.assignment3.lists.implementations.GenericComparator;
-import dk.dtu.compute.course02324.assignment3.lists.types.List;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -12,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 import java.util.Comparator;

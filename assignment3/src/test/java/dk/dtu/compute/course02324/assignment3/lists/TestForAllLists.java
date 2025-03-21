@@ -1,9 +1,9 @@
 package dk.dtu.compute.course02324.assignment3.lists;
 
-import dk.dtu.compute.course02324.assignment3.lists.types.List;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;

@@ -1,11 +1,10 @@
 package dk.dtu.compute.course02324.assignment3.lists.uses;
 
 
-import dk.dtu.compute.course02324.assignment3.lists.implementations.ArrayList;
 import dk.dtu.compute.course02324.assignment3.lists.implementations.BubbleSort;
 import dk.dtu.compute.course02324.assignment3.lists.implementations.GenericComparator;
-import dk.dtu.compute.course02324.assignment3.lists.implementations.SortedArrayList;
-import dk.dtu.compute.course02324.assignment3.lists.types.List;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.util.Comparator;
 
@@ -46,7 +45,7 @@ public class TestLists {
         print(persons);
         System.out.println("--------------------");
 
-        persons = new SortedArrayList<>();
+        persons = new ArrayList<>();
         persons.add(new Person("Egon", 50 ));
         persons.add(new Person("Ekkart", 74));
         persons.add(new Person("Anton", 84));

@@ -1,9 +1,6 @@
 package dk.dtu.compute.course02324.assignment3.lists.uses;
 
 
-import dk.dtu.compute.course02324.assignment3.lists.implementations.ArrayList;
-import dk.dtu.compute.course02324.assignment3.lists.implementations.SortedArrayList;
-import dk.dtu.compute.course02324.assignment3.lists.types.List;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -12,6 +9,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * A simple JavaFX application with a simple GUI for manually
@@ -21,6 +21,24 @@ import javafx.stage.Stage;
  *
  */
 public class PersonsApp extends Application {
+
+   // private void switchImpl(List<Person> List){
+     //   if(personsGUI != null){
+          //  root.getChildren().remove(personsGUI);
+       // }
+       // if(list != null){
+          //  personsGUI = new PersonsGUI(List){
+               // root.getChildren().add(personGUI);
+              //  this.stage.setTitle("Perosns list test: " + list.getPersons()){
+
+              //  } else {
+
+               // }
+
+           // }
+       // }
+
+   // }
 
     /**
      * The stage of the GUI of this test application.
@@ -85,14 +103,7 @@ public class PersonsApp extends Application {
         );
         selectMenu.getItems().add(unsortedListItem);
 
-        MenuItem sortedListItem = new MenuItem("sorted List");
-        sortedListItem.setOnAction(
-                e -> {
-                    List<Person> list = new SortedArrayList<>();
-                    switchImpl(list);
-                }
-        );
-        selectMenu.getItems().add(sortedListItem);
+
 
         MenuItem noListItem = new MenuItem("No Implementation");
         noListItem.setOnAction(
