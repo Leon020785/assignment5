@@ -19,6 +19,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
+
+
 /**
  * A GUI element that is allows the user to interact and
  * change a list of persons.
@@ -54,6 +56,11 @@ public class PersonsGUI extends GridPane {
         TextField nameField = new TextField();
         nameField.setPrefColumnCount(5);
 
+        TextField ageField = new TextField();
+        ageField.setPrefColumnCount(5);
+
+
+
 
         TextField weightField = new TextField();
         weightField.setPrefColumnCount(5);
@@ -74,7 +81,7 @@ public class PersonsGUI extends GridPane {
                 errorLabel.setText("");
                 int weight = Integer.parseInt(weightField.getText());
                 if (weight < 0) throw new NumberFormatException("Weight must be positive");
-                Person person = new Person(nameField.getText(), weight);
+                Person person = new Person(nameField.getText(), weight, Person.getAge());
                 persons.add(person);
                 // makes sure that the GUI is updated accordingly
                 update();
@@ -91,7 +98,7 @@ public class PersonsGUI extends GridPane {
                 int index = Integer.parseInt(indexField.getText());
                 int weight = Integer.parseInt(weightField.getText());
                 if (weight < 0) throw new NumberFormatException("Index is not valid");
-                Person person = new Person(nameField.getText(), weight);
+                Person person = new Person(nameField.getText(), weight, Person.getAge());
                 persons.add(index, person);
                 update();
             } catch (NumberFormatException | IndexOutOfBoundsException ex) {
@@ -128,9 +135,10 @@ public class PersonsGUI extends GridPane {
 
         Label name = new Label("Name");
         Label weight = new Label("Weight");
-        HBox overskrifter = new HBox(name, weight);
+        Label age = new Label("Age");
+        HBox overskrifter = new HBox(name, weight, age);
         overskrifter.setSpacing(45.0);
-        HBox inputFelter = new HBox(nameField, weightField);
+        HBox inputFelter = new HBox(nameField, weightField, ageField);
         inputFelter.setSpacing(2.0);
 
         indexField.setMaxWidth(40);

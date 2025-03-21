@@ -7,14 +7,19 @@ public class Person implements Comparable<Person> {
 
     final public String name;
     final public double weight;
+    public static int age;
 
-    public Person(@NotNull String name, @NotNull double weight) {
-        if (name == null || weight <= 0) {
+    public Person(@NotNull String name, @NotNull double weight,@NotNull int age) {
+        if (name == null || weight <= 0 || age >= 0) {
             throw new IllegalArgumentException("A persons must be initialized with a" +
                     "(non null) name and an age greater than 0");
         }
         this.name = name;
         this.weight = weight;
+        this.age = age;
+    }
+    public static int getAge(){
+        return age;
     }
 
     public String getName() {
