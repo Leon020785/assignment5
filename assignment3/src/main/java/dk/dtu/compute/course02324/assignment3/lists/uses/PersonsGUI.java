@@ -248,10 +248,38 @@ public class PersonsGUI extends GridPane {
             maxAgeLabel.setText("Max age: 0");
         }
 
+        // OPGAVE 5b - 3 (for loop --> stream i most comment name)
 
+        /*
+        Old code:
+        HashMap<String, Integer> nameCount = new HashMap<>();
+        for (int i = 0; i < persons.size(); i++) {
+            nameCount.put(persons.get(i).getName(), nameCount.getOrDefault(persons.get(i).getName(), 0) + 1);
+        }
+        String mostCommonName = "N/A";
+        int maxCount = 0;
+        for (Map.Entry<String, Integer> entry : nameCount.entrySet()) {
+            if (entry.getValue() > maxCount) {
+                mostCommonName = entry.getKey();
+                maxCount = entry.getValue();
+            }
+        }
+        mostCommonNameLabel.setText("Most common name: " + mostCommonName);
+
+         */
+
+
+        /*
+        New code:
+        finder "the most common name". I stedet for, for loop, har vi implementeret stream.
+
+         */
         String mostCommonName = persons.stream()
                 .map(Person::getName)
                 .collect(Collectors.groupingBy(name -> name, Collectors.counting()))
+
+                // Konverterer Map<String, Long> (navne og deres forekomst) til et Stream af Map.Entry<String, Long>
+                // Dette giver mulighed for at finde den mest hyppige post ved at sammenligne værdierne (forekomsterne)
                 .entrySet().stream()
                 .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey)
