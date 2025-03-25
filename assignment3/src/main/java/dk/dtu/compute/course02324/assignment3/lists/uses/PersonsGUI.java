@@ -136,6 +136,23 @@ public class PersonsGUI extends GridPane {
         // combines the above elements into vertically arranged boxes
         // which are then added to the left column of the grid pane
 
+        // Button for "Time Pass"
+        Button timePassButton = new Button("Time Pass");
+        timePassButton.setOnAction(e -> {
+            persons.removeIf(person -> {
+                person.setAge(person.getAge() + 1); // Increase age by 1
+
+                if (person.getAge() > 30) {
+                    person.setWeight((int) (person.getWeight() * 1.08)); // Increase weight by 8%
+                }
+
+               return person.getAge() >= 99; // Remove if 99 or older
+            });
+
+            update(); // Refresh UI
+        });
+
+
 
         Label name = new Label("Name");
         Label weight = new Label("Weight");
@@ -152,7 +169,7 @@ public class PersonsGUI extends GridPane {
         HBox spacer = new HBox();
 
 
-        VBox actionBox = new VBox(overskrifter, inputFelter, addButton, addIndexHBox, sortButton, clearButton, avgWeightLabel, mostCommonNameLabel, maxAgeLabel,minAgeLabel,errorLabel);
+        VBox actionBox = new VBox(overskrifter, inputFelter, addButton, addIndexHBox, sortButton, clearButton, timePassButton, avgWeightLabel, mostCommonNameLabel, maxAgeLabel,minAgeLabel,errorLabel);
         //VBox actionBox = new VBox(nameField, weightField, indexField, addButton, addAtIndexButton, sortButton, clearButton);
 
         actionBox.setSpacing(5.0);
@@ -170,10 +187,10 @@ public class PersonsGUI extends GridPane {
         personsPane.setVgap(5);
 
         ScrollPane scrollPane = new ScrollPane(personsPane);
-        scrollPane.setMinWidth(300);
-        scrollPane.setMaxWidth(300);
-        scrollPane.setMinHeight(300);
-        scrollPane.setMaxHeight(300);
+        scrollPane.setMinWidth(500);
+        scrollPane.setMaxWidth(500);
+        scrollPane.setMinHeight(500);
+        scrollPane.setMaxHeight(500);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
@@ -204,6 +221,7 @@ public class PersonsGUI extends GridPane {
                                         .average()
                                         .orElse(0.0);
         avgWeightLabel.setText("Average weight: " + avgWeight);
+        
 
         // opgave 5 her beregner den AVG age hvor vi bruger stream.
         /*if (persons.size() > 0) {

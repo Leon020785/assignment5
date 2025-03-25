@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Person implements Comparable<Person> {
 
     final public String name;
-    final public double weight;
+    public double weight;
     public int age;
 
     public Person(@NotNull String name, @NotNull double weight,@NotNull int age) {
@@ -17,6 +17,7 @@ public class Person implements Comparable<Person> {
         this.name = name;
         this.weight = weight;
         this.age = age;
+
 
     }
     public int getAge(){
@@ -31,6 +32,10 @@ public class Person implements Comparable<Person> {
 
     public String getName() {
         return name;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 
     public double getWeight() {
@@ -71,6 +76,7 @@ public class Person implements Comparable<Person> {
         // chose a simpler representation here.
         return name + ", " + weight + "kg, " + age + " years";
     }
+
 
 
 }
