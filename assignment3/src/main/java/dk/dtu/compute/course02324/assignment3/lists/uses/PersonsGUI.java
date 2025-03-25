@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class PersonsGUI extends GridPane {
 
@@ -248,25 +249,17 @@ public class PersonsGUI extends GridPane {
         }
 
 
+        String mostCommonName = persons.stream()
+                .map(Person::getName)
+                .collect(Collectors.groupingBy(name -> name, Collectors.counting()))
+                .entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse("N/A");
 
-
-
-
-        HashMap<String, Integer> nameCount = new HashMap<>();
-        for (int i = 0; i < persons.size(); i++) {
-            nameCount.put(persons.get(i).getName(), nameCount.getOrDefault(persons.get(i).getName(), 0) + 1);
-        }
-        String mostCommonName = "N/A";
-        int maxCount = 0;
-        for (Map.Entry<String, Integer> entry : nameCount.entrySet()) {
-            if (entry.getValue() > maxCount) {
-                mostCommonName = entry.getKey();
-                maxCount = entry.getValue();
-            }
-        }
         mostCommonNameLabel.setText("Most common name: " + mostCommonName);
-        // adds all persons to the list in the personsPane (with
-        // a delete button in front of it)
+
+        // Tilføj personer til GUI'en
         for (int i = 0; i < persons.size(); i++) {
             Person person = persons.get(i);
             Label personLabel = new Label(i + ": " + person.toString());

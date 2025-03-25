@@ -8,7 +8,7 @@ public class Person implements Comparable<Person> {
 
     final public String name;
     public double weight;
-    public int age;
+    private int age;
 
     public Person(@NotNull String name, @NotNull double weight,@NotNull int age) {
         if (name == null || weight <= 0 || age < 0) {
