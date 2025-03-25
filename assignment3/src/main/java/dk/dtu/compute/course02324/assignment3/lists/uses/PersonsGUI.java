@@ -169,7 +169,7 @@ public class PersonsGUI extends GridPane {
         HBox spacer = new HBox();
 
 
-        VBox actionBox = new VBox(overskrifter, inputFelter, addButton, addIndexHBox, sortButton, clearButton, timePassButton, avgWeightLabel, mostCommonNameLabel, maxAgeLabel,minAgeLabel,errorLabel);
+        VBox actionBox = new VBox(overskrifter, inputFelter, addButton, addIndexHBox, sortButton, clearButton,timePassButton, avgWeightLabel, mostCommonNameLabel, maxAgeLabel,minAgeLabel,errorLabel);
         //VBox actionBox = new VBox(nameField, weightField, indexField, addButton, addAtIndexButton, sortButton, clearButton);
 
         actionBox.setSpacing(5.0);
@@ -221,7 +221,7 @@ public class PersonsGUI extends GridPane {
                                         .average()
                                         .orElse(0.0);
         avgWeightLabel.setText("Average weight: " + avgWeight);
-        
+
 
         // opgave 5 her beregner den AVG age hvor vi bruger stream.
         /*if (persons.size() > 0) {

@@ -8,12 +8,7 @@ import java.util.List;
 
 import java.util.Comparator;
 
-/**
- * To quickly play with the list implementations, this class implements some
- * uses in the static main method.
- *
- * @author Ekkart Kindler, ekki@dtu.dk
- */
+
 public class TestLists {
 
     public static Comparator<Person> comparator = new GenericComparator<>();
